@@ -3,24 +3,30 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
-    [SerializeField] bool shootThrough;
-    [SerializeField] bool breakable;
-
-
-
+    [SerializeField] protected bool shootThrough;
+    [SerializeField] protected bool breakable;
+    [SerializeField] protected float hp;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(float damage)
     {
-
+      if (breakable)
+        {
+            hp -= damage;
+            if (hp <= 0)
+            {
+                Death();
+            }
+        }
     }
-
-
+    void Death()
+    {
+        Destroy(gameObject);
+    }
 }
